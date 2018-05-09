@@ -32,6 +32,15 @@ def _normalize_prob_two_dim(prob, item_set1, item_set2):
             result[item] = _normalize_prob(prob.get(item), item_set2)
     return result
 
+def train():
+    # learn with symbol & smoothing params
+    '''
+    + model.learn
+    + return model
+    :return:
+    '''
+    pass
+
 class Model(object):
     def __init__(self, states, symbols, start_prob=None, trans_prob=None, emit_prob=None):
         # Q: 상태(states): hot, cold
@@ -102,7 +111,33 @@ class Model(object):
                 prob = 0
                 for state_to in self._states:
                     prob += self.trans_prob(state_from, state_to) * \
-                        self.emit_prob(state_to, sequence[index]) * \
+                        self.emit__prob(state_to, sequence[index]) * \
                         beta[1][state_to]
                 beta[0][state_from] = prob
         return beta
+
+    def evaluate(self):
+        '''
+        Likelihood calculation
+        get sum of probabilities > and _forward algorithm
+        :return:
+        '''
+        pass
+
+
+    def decode(self):
+        '''
+        decode >> the backtrace map
+        optimize and estimate map
+        :return:
+        '''
+        pass
+
+
+    def learn(self):
+        '''
+        find best state transition / emission prob
+        _forward & _backward >> make a map of all possible way
+        :return:
+        '''
+        pass
